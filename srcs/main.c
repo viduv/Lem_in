@@ -6,7 +6,7 @@
 /*   By: viduvern <viduvern@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/23 13:53:54 by viduvern          #+#    #+#             */
-/*   Updated: 2019/08/03 13:38:41 by viduvern         ###   ########.fr       */
+/*   Updated: 2019/08/06 02:10:31 by viduvern         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,13 +71,15 @@ char             *ft_parse(t_params *x)
             else if(parse_room(line) == 1)
             {
                 allocspace(&line);
-                STR[(hash(line) % N_ROOM_MAX)] = line;
-                printf("\033[92m %s", (STR[(hash(line) % N_ROOM_MAX)]));
+                x->hash_table[(hashe(line) % N_ROOM_MAX)].name = NULL;
+                x->hash_table[(hashe(line) % N_ROOM_MAX)].name = ft_strdup(line);
+                printf("%s", x->hash_table[hashe(line) % N_ROOM_MAX].name);
+             //   ft_putendl(STR[(hashe(line) % N_ROOM_MAX)].name);
                 x->nbr_room++;
             }
          }
-        else
-            ft_strdel(&line);
+        // else
+             ft_strdel(&line);
      }
     return(x->start == NULL ? x->start : x->end);
 }
@@ -99,6 +101,7 @@ int             main(int ac, char **av)
 {
     (void)av;
     int z;
+    
     t_params x;
     ft_bzero(&x, sizeof(t_params));
 
@@ -110,21 +113,29 @@ int             main(int ac, char **av)
         if(ft_parse(&x) == NULL)
            error();
         ft_data_adjlist(&x);
-        if(x.nbr_room < 3)
+        if(x.nbr_room < 2)
             error();
     }
     else 
         ft_putendl("\033[92m usage : ./lem_in < maps  --> One map only");
     
-    while(x.storefile[z])
-     {
-        ft_putendl(x.storefile[z]);
-        z++;
-     }
+    // while(x.storefile[z])
+    //  {
+    //     ft_putendl(x.storefile[z]);
+    //     z++;
+    //  }
+    //  z = 0;
+    //  while(z < 100000)
+    //  {  
+    //      if(x.hash_table[z].name != NULL)
+    //             ft_strdel(&x.hash_table[50].name);
+    //     z++;
+    //  }
     //ft_free_db_tab(x.storefile);
    //  ft_free_db_tab(x.init_tab);
-     ft_strdel(&x.start);
-     ft_strdel(&x.end);
+    //  ft_strdel(&x.start);
+    //  ft_strdel(&x.end);
+    
     system("leaks lem_in");
     return(0);
 }

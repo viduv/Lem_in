@@ -6,7 +6,7 @@
 /*   By: viduvern <viduvern@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/01 21:06:57 by viduvern          #+#    #+#             */
-/*   Updated: 2019/08/02 15:58:02 by viduvern         ###   ########.fr       */
+/*   Updated: 2019/08/06 02:15:18 by viduvern         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@
     str = ft_strsplit(line, '-');
     if(str[2])
         error();
-    if(strcmp(str[0], STR[hash(str[0]) % N_ROOM_MAX]) == 0)
+    if(strcmp(str[0], x->hash_table[hashe(str[0]) % N_ROOM_MAX].name) == 0)
         i++;
-    if(strcmp(str[1], STR[hash(str[1]) % N_ROOM_MAX]) == 0)
+    if(strcmp(str[1], x->hash_table[hashe(str[1]) % N_ROOM_MAX].name) == 0)
         i++;
     ft_free_db_tab(str);
     if(i == 2)

@@ -6,13 +6,13 @@
 /*   By: viduvern <viduvern@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/30 01:21:41 by viduvern          #+#    #+#             */
-/*   Updated: 2019/07/30 01:34:07 by viduvern         ###   ########.fr       */
+/*   Updated: 2019/08/05 19:50:37 by viduvern         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include    "lem_in.h"
 
-size_t			hash(char *str)
+size_t			hashe(char *str)
 {
 	unsigned int	i;
 	unsigned int	hash;

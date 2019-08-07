@@ -6,7 +6,7 @@
 /*   By: viduvern <viduvern@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 15:26:24 by viduvern          #+#    #+#             */
-/*   Updated: 2019/08/03 14:53:56 by viduvern         ###   ########.fr       */
+/*   Updated: 2019/08/06 02:22:24 by viduvern         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,21 @@
 # define N_ROOM_MAX 100000
 # define FNV_OFFSET_32 2166136261
 # define FNV_PRIME_32 16777619
-# define STR           (x->init_tab)
+//# define STR      (x->hash_table[N_ROOM_MAX])
+
+typedef struct s_linked_list
+{
+    bool        visited;
+    int          data;
+    struct s_linked_list   *next;
+}               t_linked_list;
+
+
+typedef struct              s_structure
+{
+    char        *name;
+    t_linked_list *head;
+}                           t_structure;
 
 typedef struct               s_params
 {
@@ -36,51 +50,37 @@ typedef struct               s_params
     size_t      t;
     int         symb;
     int         error;
-    char        *init_tab[N_ROOM_MAX];
+    t_structure      hash_table[N_ROOM_MAX];
+    char        *name;
     char        *storefile[N_ROOM_MAX];  
     char        *tmp;
     char        *start;
     char        *end;
 }                           t_params;
 
-typedef     struct lem_in {
 
-    char *str;
-};
+// typedef  struct                s_node
+// {
+//     bool        pass;
+//     struct node *next;
+// }                               t_node;
 
-//  typedef struct              s_adjency
-//  {
-//      int   nb_room;
-//      t_params   *storefile[N_ROOM_MAX];
-//      bool       visited;
-//      char        *tmp;
+// typedef struct                  s_lst
+// {
+//     struct node *head;
+// }                               t_lst;
 
-//  }                           t_adjency;
-
-typedef     struct          s_node
-{
-    char   *data;
-    struct t_node *next;
-}                            t_node;
-
-//  typedef    struct          t_head
-//  {
-//      char    *line;
-//      t_node  **adjlist;
-//  }                            s_head;
- 
 
 int             main(int ac, char **av);
 int             check_nbr_ants(t_params *x);
 void            error();
 char            *ft_parse(t_params *x);
-size_t			hash(char *str);
+size_t			hashe(char *str);
 void            define_flags(char *line, t_params *x);
-int             parse_room(char *line);
+int              parse_room(char *line);
 int             parse_edge(char *line, t_params *x);
 void            ft_data_adjlist(t_params *x);
-t_node          *ft_add_data_adjlist(char *data);
-void            ft_add_edge(char *src, char *dst, t_params *x);
+// void            ft_add_edge(char *src, char *dst, t_lst *x);
 void            allocspace(char **line);
 char		    **ft_free_db_tab(char **av);
 void            free_tab(t_params *x);
