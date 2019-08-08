@@ -6,7 +6,7 @@
 /*   By: viduvern <viduvern@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 15:26:24 by viduvern          #+#    #+#             */
-/*   Updated: 2019/08/06 02:22:24 by viduvern         ###   ########.fr       */
+/*   Updated: 2019/08/07 21:53:14 by viduvern         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@
 # define N_ROOM_MAX 100000
 # define FNV_OFFSET_32 2166136261
 # define FNV_PRIME_32 16777619
-//# define STR      (x->hash_table[N_ROOM_MAX])
 
 typedef struct s_linked_list
 {
@@ -58,19 +57,9 @@ typedef struct               s_params
     char        *end;
 }                           t_params;
 
-
-// typedef  struct                s_node
-// {
-//     bool        pass;
-//     struct node *next;
-// }                               t_node;
-
-// typedef struct                  s_lst
-// {
-//     struct node *head;
-// }                               t_lst;
-
-
+void            print_list(t_params *x, char *room);
+void		    ft_free_params(t_params *x);
+void		    ft_free_list(t_params *x);
 int             main(int ac, char **av);
 int             check_nbr_ants(t_params *x);
 void            error();
@@ -78,10 +67,8 @@ char            *ft_parse(t_params *x);
 size_t			hashe(char *str);
 void            define_flags(char *line, t_params *x);
 int              parse_room(char *line);
-int             parse_edge(char *line, t_params *x);
 void            ft_data_adjlist(t_params *x);
-// void            ft_add_edge(char *src, char *dst, t_lst *x);
-void            allocspace(char **line);
+void            split_name_room(char **line);
 char		    **ft_free_db_tab(char **av);
 void            free_tab(t_params *x);
 

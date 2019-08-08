@@ -6,12 +6,12 @@
 /*   By: viduvern <viduvern@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/01 21:06:57 by viduvern          #+#    #+#             */
-/*   Updated: 2019/08/06 02:15:18 by viduvern         ###   ########.fr       */
+/*   Updated: 2019/08/07 21:45:55 by viduvern         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
- int                parse_edge(char *line, t_params *x)
+ int                parse_edge_adjlist(char *line, t_params *x)
 {   
     char **str;
     int i;
@@ -39,22 +39,9 @@ int		ft_isdigit(int c)
 	return (0);
 }
 
-void            allocspace(char **line)
+void            split_name_room(char **line) 
 {
-    int i;
-    int x;
-
-    x = 0;
-    i = 0;
-    while((*line)[i])
-        i++;
-    x = i;
-    i = 0;
-    while((*line)[i] != ' ')
-        i++;
-    while((*line)[i] && i < x)
-    {
-        (*line)[i] = 0;
-        i++;
-    }
+    int len = ft_strlen(*line);
+    char *space = ft_strchr(*line, ' ');
+    ft_bzero(space, len - (space - *line));
 }

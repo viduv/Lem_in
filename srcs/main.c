@@ -6,12 +6,12 @@
 /*   By: viduvern <viduvern@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/23 13:53:54 by viduvern          #+#    #+#             */
-/*   Updated: 2019/08/06 02:10:31 by viduvern         ###   ########.fr       */
+/*   Updated: 2019/08/07 21:49:15 by viduvern         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
-
+// Define ##start et ##end Room ;
 void            define_flags(char *line, t_params *x)
 {
     if(x->symb == 1)
@@ -30,6 +30,7 @@ void            define_flags(char *line, t_params *x)
         x->symb = 2;
 }
 
+// Parse if the x and y are number. If is not return an error 
 int             parse_room(char *line)
 {
     char *str;
@@ -51,13 +52,17 @@ int             parse_room(char *line)
     ft_strdel(&str);
      return(1);  
 }
+
+/// Main parse fonction  --> Store the imput file for print at the end of program ; Parse the imput error ; Set the head of /
+// the linklist a NULL ; Store and hashe the string in an array;
+
 char             *ft_parse(t_params *x)
 {
     char *line;
 
     while(get_next_line(STDIN_FILENO, &line) > 0)
      {
-         x->storefile[x->t++] = ft_strdup(line);
+         //x->storefile[x->t++] = ft_strdup(line);
         if(x->symb > 0 || ft_strequ("##start", line) || ft_strequ("##end", line))
             define_flags(line, x);
         if(ft_check_str(line, '#') != 1 && ft_check_str(line, 'L') != 1)
@@ -70,15 +75,13 @@ char             *ft_parse(t_params *x)
             }
             else if(parse_room(line) == 1)
             {
-                allocspace(&line);
-                x->hash_table[(hashe(line) % N_ROOM_MAX)].name = NULL;
+                split_name_room(&line);
+                x->hash_table[(hashe(line) % N_ROOM_MAX)].head = NULL;
                 x->hash_table[(hashe(line) % N_ROOM_MAX)].name = ft_strdup(line);
                 printf("%s", x->hash_table[hashe(line) % N_ROOM_MAX].name);
-             //   ft_putendl(STR[(hashe(line) % N_ROOM_MAX)].name);
                 x->nbr_room++;
             }
          }
-        // else
              ft_strdel(&line);
      }
     return(x->start == NULL ? x->start : x->end);
@@ -101,41 +104,24 @@ int             main(int ac, char **av)
 {
     (void)av;
     int z;
-    
     t_params x;
-    ft_bzero(&x, sizeof(t_params));
 
+    ft_bzero(&x, sizeof(t_params));
     z = 0;
     if(ac == 1)
     {
         if(check_nbr_ants(&x) <= 0)
            error();
         if(ft_parse(&x) == NULL)
-           error();
-        ft_data_adjlist(&x);
+           error(); 
         if(x.nbr_room < 2)
             error();
+        ft_data_adjlist(&x);
     }
     else 
         ft_putendl("\033[92m usage : ./lem_in < maps  --> One map only");
-    
-    // while(x.storefile[z])
-    //  {
-    //     ft_putendl(x.storefile[z]);
-    //     z++;
-    //  }
-    //  z = 0;
-    //  while(z < 100000)
-    //  {  
-    //      if(x.hash_table[z].name != NULL)
-    //             ft_strdel(&x.hash_table[50].name);
-    //     z++;
-    //  }
-    //ft_free_db_tab(x.storefile);
-   //  ft_free_db_tab(x.init_tab);
-    //  ft_strdel(&x.start);
-    //  ft_strdel(&x.end);
-    
+     ft_free_list(&x);
+     ft_free_params(&x);
     system("leaks lem_in");
     return(0);
 }
