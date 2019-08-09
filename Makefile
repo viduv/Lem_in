@@ -6,7 +6,7 @@
 #    By: viduvern <viduvern@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/03/12 10:01:03 by viduvern          #+#    #+#              #
-#    Updated: 2019/08/07 16:58:15 by viduvern         ###   ########.fr        #
+#    Updated: 2019/08/08 21:09:08 by viduvern         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,7 @@ SRC =  srcs/main.c \
 	   srcs/ezfuct.c \
 	   srcs/free.c \
 	   srcs/print.c \
+	   srcs/bfs.c \
 
 FLAG = -Wall -Werror -Wextra -g -I includes/ 
 CG = \033[92m

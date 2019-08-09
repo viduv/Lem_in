@@ -6,7 +6,7 @@
 /*   By: viduvern <viduvern@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/07 16:56:45 by viduvern          #+#    #+#             */
-/*   Updated: 2019/08/07 21:50:08 by viduvern         ###   ########.fr       */
+/*   Updated: 2019/08/08 21:54:45 by viduvern         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ void                       print_list(t_params *x, char *room)
 
      while(print != NULL)
      {
-           ft_putstr(x->hash_table[print->data].name);
-           ft_putchar('\n');
+          ft_putstr(x->hash_table[print->data].name);
+          ft_putchar('\n');
           print = print->next;
           a++;
      }

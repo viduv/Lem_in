@@ -6,7 +6,7 @@
 /*   By: viduvern <viduvern@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/23 13:53:54 by viduvern          #+#    #+#             */
-/*   Updated: 2019/08/07 21:49:15 by viduvern         ###   ########.fr       */
+/*   Updated: 2019/08/09 00:22:44 by viduvern         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,8 +76,7 @@ char             *ft_parse(t_params *x)
             else if(parse_room(line) == 1)
             {
                 split_name_room(&line);
-                x->hash_table[(hashe(line) % N_ROOM_MAX)].head = NULL;
-                x->hash_table[(hashe(line) % N_ROOM_MAX)].name = ft_strdup(line);
+                init_hash_struct(x, line);
                 printf("%s", x->hash_table[hashe(line) % N_ROOM_MAX].name);
                 x->nbr_room++;
             }
@@ -120,8 +119,9 @@ int             main(int ac, char **av)
     }
     else 
         ft_putendl("\033[92m usage : ./lem_in < maps  --> One map only");
-     ft_free_list(&x);
-     ft_free_params(&x);
-    system("leaks lem_in");
+  //  ft_putendl("la");
+    // ft_free_list(&x);
+    // ft_free_params(&x);
+   // system("leaks lem_in");
     return(0);
 }

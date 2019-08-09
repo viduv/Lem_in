@@ -6,7 +6,7 @@
 /*   By: viduvern <viduvern@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 15:26:24 by viduvern          #+#    #+#             */
-/*   Updated: 2019/08/07 21:53:14 by viduvern         ###   ########.fr       */
+/*   Updated: 2019/08/09 00:37:08 by viduvern         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,22 @@
 # define N_ROOM_MAX 100000
 # define FNV_OFFSET_32 2166136261
 # define FNV_PRIME_32 16777619
+# define ACCESS_HASH(index, string)  x->hash_table[index].string
+# define N_ROOM x->nbr_room;
+typedef struct  s_queue
+{
+    int *queue;
+    int front;
+    int rear;
+
+}               t_queue;
+
 
 typedef struct s_linked_list
 {
     bool        visited;
     int          data;
+    size_t       step;
     struct s_linked_list   *next;
 }               t_linked_list;
 
@@ -45,7 +56,7 @@ typedef struct              s_structure
 typedef struct               s_params
 {
     size_t      nbr_ants;
-    size_t      nbr_room;
+    int         nbr_room;
     size_t      t;
     int         symb;
     int         error;
@@ -57,6 +68,8 @@ typedef struct               s_params
     char        *end;
 }                           t_params;
 
+void            init_hash_struct(t_params *x, char *line);
+void            dispatch_bfs(t_params *x);
 void            print_list(t_params *x, char *room);
 void		    ft_free_params(t_params *x);
 void		    ft_free_list(t_params *x);
