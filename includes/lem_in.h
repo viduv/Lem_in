@@ -6,7 +6,7 @@
 /*   By: viduvern <viduvern@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 15:26:24 by viduvern          #+#    #+#             */
-/*   Updated: 2019/08/09 00:37:08 by viduvern         ###   ########.fr       */
+/*   Updated: 2019/08/10 00:58:05 by viduvern         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ typedef struct  s_queue
 typedef struct s_linked_list
 {
     bool        visited;
+    bool        path;
     int          data;
     size_t       step;
     struct s_linked_list   *next;
@@ -68,6 +69,7 @@ typedef struct               s_params
     char        *end;
 }                           t_params;
 
+void            ft_get_path(t_params *x, int vertex);
 void            init_hash_struct(t_params *x, char *line);
 void            dispatch_bfs(t_params *x);
 void            print_list(t_params *x, char *room);

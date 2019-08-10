@@ -6,7 +6,7 @@
 /*   By: viduvern <viduvern@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/31 01:43:16 by viduvern          #+#    #+#             */
-/*   Updated: 2019/08/09 02:41:23 by viduvern         ###   ########.fr       */
+/*   Updated: 2019/08/10 00:54:06 by viduvern         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ t_linked_list              *c_node_adjlist(int index)
     t_linked_list *q = (t_linked_list*)malloc(sizeof(t_linked_list));
     q->data = index;
     q->visited = false;
-     //q->pass = false;
+    q->path = false;
     q->step = 0;
     q->next = NULL;
     return(q);
@@ -85,7 +85,7 @@ static int                parse_edge_adjlist(char *line, t_params *x)
         }
         ft_strdel(&line);
     }
-   //  print_list(x, "r1");
+    split_name_room(&x->start);
+    split_name_room(&x->end);
      dispatch_bfs(x);
-    // print_list(x, "r0");
 }

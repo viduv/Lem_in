@@ -6,7 +6,7 @@
 /*   By: viduvern <viduvern@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/08 12:50:29 by viduvern          #+#    #+#             */
-/*   Updated: 2019/08/09 02:39:21 by viduvern         ###   ########.fr       */
+/*   Updated: 2019/08/10 01:17:22 by viduvern         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,6 @@
 int             start_end_vertex(t_params *x)
 {
     int start_vertex;
-    split_name_room(&x->start);
-    split_name_room(&x->end);
     start_vertex = (hashe(x->start) % N_ROOM_MAX);
     x->hash_table[start_vertex].head->visited = true;
     return(start_vertex);
@@ -30,7 +28,7 @@ static t_queue         *create_queue(t_params *x)
     i = -1;
     q = (t_queue*)malloc(sizeof(t_queue));
     q->queue = (int*)malloc(sizeof(int) * x->nbr_room);
-    while(q->queue[i++] && i < x->nbr_room)
+   while(i++ < x->nbr_room)
         q->queue[i] = 0;
     q->front = -1;
     q->rear = -1;
@@ -58,13 +56,10 @@ int dequeue(t_queue* q, t_params *x)
 {
     int item;
 
-    if(is_empty(q))
-    {
-        printf("Queue is empty");
-        item = -1;
-    }
-    else if(q->queue[q->front] == hashe(x->end) % N_ROOM_MAX)
-        item = 0;
+   if(q->queue[q->front] == hashe(x->end) % N_ROOM_MAX)
+       item = 5;
+//    else if(q->queue[q->front + 1] == 0)
+//        item = 0;
     else
     {
         item = q->queue[q->front];
@@ -81,7 +76,7 @@ void            dispatch_bfs(t_params *x)
     t_linked_list *l;
     int vertex = 0;
     int adjvertex = 0;
-    int step;
+    size_t step = 0;
 
     q = create_queue(x);
     vertex = start_end_vertex(x);
@@ -89,24 +84,27 @@ void            dispatch_bfs(t_params *x)
     while(!is_empty(q))
     {
         vertex = dequeue(q, x);
-        if(vertex == 0)
-        {
-            ft_putendl("but");
-            break;
-        }
         l = ACCESS_HASH(vertex, head);
         step = ACCESS_HASH(vertex, head)->step;
         while(l != NULL)
         {
+            if((hashe(x->end) % N_ROOM_MAX) == l->data)
+              {
+                  // BACKTRACK;
+                  vertex = hashe(x->start) % N_ROOM_MAX;
+                ft_putnbr(ACCESS_HASH(vertex, head)->step);
+                ft_get_path(x, vertex);
+               // ft_putendl("la");
+                    break;
+              }
             adjvertex = l->data;
-            if(ACCESS_HASH(adjvertex, head)->path == true)
-                    ft_putendl("coucou les copains");
-            else if(ACCESS_HASH(adjvertex, head)->visited == false)
+            if(ACCESS_HASH(adjvertex, head)->visited == false && \
+            ACCESS_HASH(adjvertex, head)->path == false)
              {
                 ACCESS_HASH(adjvertex, head)->visited = true;
-                ACCESS_HASH(adjvertex, head)->step += 1;
+               ACCESS_HASH(adjvertex, head)->step = (step + 1);
+                insert_queue(q, adjvertex);
              }
-            insert_queue(q, adjvertex);
             l = l->next;
         }
     }
