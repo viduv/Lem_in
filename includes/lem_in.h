@@ -6,7 +6,7 @@
 /*   By: viduvern <viduvern@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 15:26:24 by viduvern          #+#    #+#             */
-/*   Updated: 2019/08/10 00:58:05 by viduvern         ###   ########.fr       */
+/*   Updated: 2019/08/11 03:22:56 by viduvern         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,15 @@ typedef struct               s_params
     char        *end;
 }                           t_params;
 
-void            ft_get_path(t_params *x, int vertex);
+void            check_queue(t_params *x, int step, t_queue *q, int adjvertex);
+int             dequeue(t_queue* q);
+t_queue         *create_queue(t_params *x);
+void            insert_queue(t_queue *q, int value);
+int             start_end_vertex(t_params *x);
+int             is_empty(t_queue *q); 
+void            refresh_visited(t_params *x);
+void            free_queue(t_queue *q);
+void            ft_get_path(t_params *x, int vertex, t_queue *q);
 void            init_hash_struct(t_params *x, char *line);
 void            dispatch_bfs(t_params *x);
 void            print_list(t_params *x, char *room);
@@ -86,5 +94,8 @@ void            ft_data_adjlist(t_params *x);
 void            split_name_room(char **line);
 char		    **ft_free_db_tab(char **av);
 void            free_tab(t_params *x);
+void            free_queue(t_queue *q);
+ void           refresh_visited(t_params *x);
+void            refresh_tab(t_queue *q, t_params *x);
 
 #endif

@@ -6,7 +6,7 @@
 #    By: viduvern <viduvern@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/03/12 10:01:03 by viduvern          #+#    #+#              #
-#    Updated: 2019/08/09 23:14:56 by viduvern         ###   ########.fr        #
+#    Updated: 2019/08/11 03:44:45 by viduvern         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,8 @@ SRC =  srcs/main.c \
 	   srcs/free.c \
 	   srcs/print.c \
 	   srcs/bfs.c \
-	   srcs/path.c \
+	   srcs/utils_queue.c \
+	   srcs/queue.c \
 
 FLAG = -Wall -Werror -Wextra -g -I includes/ 
 CG = \033[92m

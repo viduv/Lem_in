@@ -6,68 +6,38 @@
 /*   By: viduvern <viduvern@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/08 12:50:29 by viduvern          #+#    #+#             */
-/*   Updated: 2019/08/10 01:17:22 by viduvern         ###   ########.fr       */
+/*   Updated: 2019/08/11 03:51:00 by viduvern         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
-
-int             start_end_vertex(t_params *x)
+void                ft_get_path(t_params *x, int vertex, t_queue *q)
 {
-    int start_vertex;
-    start_vertex = (hashe(x->start) % N_ROOM_MAX);
-    x->hash_table[start_vertex].head->visited = true;
-    return(start_vertex);
-}
-
-static t_queue         *create_queue(t_params *x)
-{
-    t_queue *q;
-    int i;
-
-    i = -1;
-    q = (t_queue*)malloc(sizeof(t_queue));
-    q->queue = (int*)malloc(sizeof(int) * x->nbr_room);
-   while(i++ < x->nbr_room)
-        q->queue[i] = 0;
-    q->front = -1;
-    q->rear = -1;
-    ft_putendl("antoine tu as tord avec un d par contre");
-    return(q);
-}
-
-int     is_empty(t_queue *q) 
-{
-    if(q->rear == -1) 
-        return 1;
-    else 
-        return 0;
-}
-
-static void insert_queue(t_queue *q, int value)
-{
-    if(q->front == -1)
-            q->front = 0;
-     q->rear++;
-     q->queue[q->rear] = value;
-}
-
-int dequeue(t_queue* q, t_params *x)
-{
-    int item;
-
-   if(q->queue[q->front] == hashe(x->end) % N_ROOM_MAX)
-       item = 5;
-//    else if(q->queue[q->front + 1] == 0)
-//        item = 0;
-    else
+    t_linked_list *s;
+    size_t step = 0;
+    int next_vertex = 0;
+     step = ACCESS_HASH(vertex, head)->step;
+    ft_putendl(ACCESS_HASH(vertex, name));
+    while(step > 0)
     {
-        item = q->queue[q->front];
-        q->front++;
-        if(q->front > q->rear)
-            q->front = q->rear = -1;
+        s = ACCESS_HASH(vertex, head);
+        ACCESS_HASH(vertex, head)->path = true;
+        while(s != NULL)
+         {
+            next_vertex = s->data;
+            if(ACCESS_HASH(next_vertex, head)->step == (step - 1))
+            {
+                    ft_putendl(ACCESS_HASH(vertex, name));
+                vertex = next_vertex;
+                break;
+            }
+            s = s->next;
+         }
+         step = ACCESS_HASH(vertex, head)->step;
     }
-    return item;
+     refresh_visited(x);
+     refresh_tab(q,x);
+    // free_queue(q);
 }
 
 void            dispatch_bfs(t_params *x)
@@ -83,28 +53,20 @@ void            dispatch_bfs(t_params *x)
     insert_queue(q, vertex);
     while(!is_empty(q))
     {
-        vertex = dequeue(q, x);
+        if((vertex = dequeue(q)) == 0)
+                break;
         l = ACCESS_HASH(vertex, head);
         step = ACCESS_HASH(vertex, head)->step;
         while(l != NULL)
-        {
+         {
             if((hashe(x->end) % N_ROOM_MAX) == l->data)
               {
-                  // BACKTRACK;
-                  vertex = hashe(x->start) % N_ROOM_MAX;
-                ft_putnbr(ACCESS_HASH(vertex, head)->step);
-                ft_get_path(x, vertex);
-               // ft_putendl("la");
-                    break;
+                ft_get_path(x, vertex, q);
+                dispatch_bfs(x);
               }
             adjvertex = l->data;
-            if(ACCESS_HASH(adjvertex, head)->visited == false && \
-            ACCESS_HASH(adjvertex, head)->path == false)
-             {
-                ACCESS_HASH(adjvertex, head)->visited = true;
-               ACCESS_HASH(adjvertex, head)->step = (step + 1);
-                insert_queue(q, adjvertex);
-             }
+            if(ACCESS_HASH(adjvertex, head)->visited == false && ACCESS_HASH(adjvertex, head)->path == false)
+                check_queue(x, step, q, adjvertex);
             l = l->next;
         }
     }

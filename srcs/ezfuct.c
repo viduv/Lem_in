@@ -6,15 +6,25 @@
 /*   By: viduvern <viduvern@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/01 21:06:57 by viduvern          #+#    #+#             */
-/*   Updated: 2019/08/09 01:43:40 by viduvern         ###   ########.fr       */
+/*   Updated: 2019/08/11 03:24:57 by viduvern         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
+int     is_empty(t_queue *q) 
+{
+    if(q->rear == -1) 
+        return 1;
+    else 
+        return 0;
+}
+
 void                init_hash_struct(t_params *x, char *line)
 {
     x->hash_table[(hashe(line) % N_ROOM_MAX)].head = NULL;
+    if(x->hash_table[(hashe(line) % N_ROOM_MAX)].name != NULL)
+        error();
     x->hash_table[(hashe(line) % N_ROOM_MAX)].name = ft_strdup(line);
 }
  int                parse_edge_adjlist(char *line, t_params *x)
