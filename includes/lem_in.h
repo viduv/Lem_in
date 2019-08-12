@@ -6,7 +6,7 @@
 /*   By: viduvern <viduvern@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 15:26:24 by viduvern          #+#    #+#             */
-/*   Updated: 2019/08/11 03:22:56 by viduvern         ###   ########.fr       */
+/*   Updated: 2019/08/11 23:07:24 by viduvern         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ void            refresh_visited(t_params *x);
 void            free_queue(t_queue *q);
 void            ft_get_path(t_params *x, int vertex, t_queue *q);
 void            init_hash_struct(t_params *x, char *line);
-void            dispatch_bfs(t_params *x);
+int             dispatch_bfs(t_params *x);
 void            print_list(t_params *x, char *room);
 void		    ft_free_params(t_params *x);
 void		    ft_free_list(t_params *x);

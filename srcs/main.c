@@ -6,7 +6,7 @@
 /*   By: viduvern <viduvern@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/23 13:53:54 by viduvern          #+#    #+#             */
-/*   Updated: 2019/08/11 03:49:06 by viduvern         ###   ########.fr       */
+/*   Updated: 2019/08/11 23:12:10 by viduvern         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,6 @@ int             main(int ac, char **av)
   //  ft_putendl("la");
     ft_free_list(&x);
     ft_free_params(&x);
-    //system("leaks lem_in");
+   // system("leaks lem_in");
     return(0);
 }

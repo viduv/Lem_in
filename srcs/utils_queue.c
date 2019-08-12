@@ -6,11 +6,20 @@
 /*   By: viduvern <viduvern@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/09 23:14:14 by viduvern          #+#    #+#             */
-/*   Updated: 2019/08/11 03:50:28 by viduvern         ###   ########.fr       */
+/*   Updated: 2019/08/11 23:15:32 by viduvern         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
+
+void             ft_intdel(int **s)
+{
+    if(s != NULL)
+    {
+        free(*s);
+        *s = NULL;
+    }
+}
 int             start_end_vertex(t_params *x)
 {
     int start_vertex;
@@ -36,17 +45,6 @@ int             start_end_vertex(t_params *x)
     }
 void                    free_queue(t_queue *q)
 {
-//     if(q->queue)
-//      {
-//         free(q->queue);
-       free(q);
-//      }
-//      q->queue = NULL;
-     q = NULL;
-}
-void               refresh_tab(t_queue *q, t_params *x)
-{
-    int i = 0;
-    while(i++ < x->nbr_room - 1)
-        q->queue[i] = 0;
+     ft_intdel(&q->queue);
+     free(q);
 }

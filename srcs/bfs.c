@@ -6,7 +6,7 @@
 /*   By: viduvern <viduvern@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/08 12:50:29 by viduvern          #+#    #+#             */
-/*   Updated: 2019/08/11 03:51:00 by viduvern         ###   ########.fr       */
+/*   Updated: 2019/08/11 23:32:49 by viduvern         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,11 @@
 void                ft_get_path(t_params *x, int vertex, t_queue *q)
 {
     t_linked_list *s;
-    size_t step = 0;
-    int next_vertex = 0;
-     step = ACCESS_HASH(vertex, head)->step;
-    ft_putendl(ACCESS_HASH(vertex, name));
+    size_t step;
+    int next_vertex;
+    
+    next_vertex = 0;
+    step = ACCESS_HASH(vertex, head)->step;
     while(step > 0)
     {
         s = ACCESS_HASH(vertex, head);
@@ -36,11 +37,10 @@ void                ft_get_path(t_params *x, int vertex, t_queue *q)
          step = ACCESS_HASH(vertex, head)->step;
     }
      refresh_visited(x);
-     refresh_tab(q,x);
-    // free_queue(q);
+     free_queue(q);
 }
 
-void            dispatch_bfs(t_params *x)
+int           dispatch_bfs(t_params *x)
 {
     t_queue *q;
     t_linked_list *l;
@@ -63,6 +63,7 @@ void            dispatch_bfs(t_params *x)
               {
                 ft_get_path(x, vertex, q);
                 dispatch_bfs(x);
+                return(1);
               }
             adjvertex = l->data;
             if(ACCESS_HASH(adjvertex, head)->visited == false && ACCESS_HASH(adjvertex, head)->path == false)
@@ -70,4 +71,6 @@ void            dispatch_bfs(t_params *x)
             l = l->next;
         }
     }
+     free_queue(q);
+    return(0);
 }
