@@ -6,7 +6,7 @@
 /*   By: viduvern <viduvern@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/31 01:43:16 by viduvern          #+#    #+#             */
-/*   Updated: 2019/08/12 16:16:03 by viduvern         ###   ########.fr       */
+/*   Updated: 2019/08/12 20:02:53 by viduvern         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,6 @@ static void                parse_edge_adjlist(char *line, t_params *x)
  void                ft_data_adjlist(t_params *x)
  {
     char *line;
-    ft_putendl("LES DERNIESRS SERONT LES PREMIER NTPSNKLDKLDNKLNKNKLNKLKLN");
     parse_edge_adjlist(x->tmp, x);
     set_index_adjlist(x->tmp, x);
     while(get_next_line(STDIN_FILENO, &line) > 0)

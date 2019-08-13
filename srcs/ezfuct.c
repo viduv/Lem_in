@@ -6,11 +6,30 @@
 /*   By: viduvern <viduvern@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/01 21:06:57 by viduvern          #+#    #+#             */
-/*   Updated: 2019/08/12 16:04:16 by viduvern         ###   ########.fr       */
+/*   Updated: 2019/08/13 15:27:49 by viduvern         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
+
+int                *reverse_integer(int *tab)
+{
+    int z;
+    int i;
+    int tmp;
+    i = 0;
+    z = 0;
+    while(tab[z] != 0)
+        z++;
+    while(i < (z / 2))
+    {
+        tmp = tab[i];
+        tab[i] = tab[z - i - 1];
+        tab[z - i - 1] = tmp;
+        i++;
+    }
+    return(tab);
+}
 
 int     is_empty(t_queue *q) 
 {
@@ -26,10 +45,7 @@ void                init_hash_struct(t_params *x, char *line)
 
     index = hashe(line) % N_ROOM_MAX;
     while(x->hash_table[index].name != NULL)
-    {
         index++;
-        ft_putendl("ENCORE MON POTE C CHIANT LA VIE EEEEEE");
-    }
     x->hash_table[index].head = NULL;
     x->hash_table[index].name = ft_strdup(line);
 }

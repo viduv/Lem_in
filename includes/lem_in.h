@@ -6,7 +6,7 @@
 /*   By: viduvern <viduvern@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 15:26:24 by viduvern          #+#    #+#             */
-/*   Updated: 2019/08/12 17:03:39 by viduvern         ###   ########.fr       */
+/*   Updated: 2019/08/13 15:41:42 by viduvern         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ typedef struct s_list_path
 {
     int step;
     int *path;
+    int ants;
     struct s_list_path *next;
 }               t_list_path;
 
@@ -42,7 +43,6 @@ typedef struct  s_queue
     int *queue;
     int front;
     int rear;
-  //  t_list_path *first;
 
 }               t_queue;
 
@@ -78,6 +78,9 @@ typedef struct               s_params
     char        *end;
 }                           t_params;
 
+int             *reverse_integer(int *tab);
+void            dispatch(t_params *x, t_list_path *first);
+void            ft_free_path(t_list_path *head);
 void            check_queue(t_params *x, int step, t_queue *q, int adjvertex);
 int             dequeue(t_queue* q);
 t_queue         *create_queue(t_params *x);

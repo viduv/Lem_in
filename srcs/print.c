@@ -6,15 +6,26 @@
 /*   By: viduvern <viduvern@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/07 16:56:45 by viduvern          #+#    #+#             */
-/*   Updated: 2019/08/12 16:56:27 by viduvern         ###   ########.fr       */
+/*   Updated: 2019/08/12 18:49:23 by viduvern         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
+void                     ft_free_path(t_list_path *head)
+{
+     t_list_path *tmp;
+
+     while(head != NULL)
+     {
+          tmp = head->next;
+          free(head->path);
+          free(head);
+          head = tmp;
+     }
+}
 void                     print_path(t_list_path *head)
 {
-     ft_putendl(";aa");
      while(head != NULL)
      {
           ft_putnbr(head->step);

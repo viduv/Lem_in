@@ -6,7 +6,7 @@
 /*   By: viduvern <viduvern@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/08 12:50:29 by viduvern          #+#    #+#             */
-/*   Updated: 2019/08/12 17:22:56 by viduvern         ###   ########.fr       */
+/*   Updated: 2019/08/13 15:41:28 by viduvern         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ t_list_path              *c_node_path(int *path, int step)
     t_list_path *tmp = (t_list_path*)malloc(sizeof(t_list_path));
     tmp->step = step;
     tmp->path = path;
+    tmp->ants = 0;
     tmp->next = NULL;
     return(tmp);
 }
@@ -26,10 +27,9 @@ void                ft_store_path(int step, int *path, t_list_path **first)
     t_list_path *new;
     t_list_path *tmp;
     tmp = (*first);
-    ft_putendl("laaaa");
     new = c_node_path(path, step);
-    if(*first == NULL)
-        *first = new;
+    if((*first) == NULL)
+        (*first) = new;
     else
     {
          while(tmp->next != NULL)
@@ -64,9 +64,6 @@ void                ft_get_path(t_params *x, int vertex, t_queue *q, t_list_path
             if(ACCESS_HASH(next_vertex, head)->step == (step - 1))
             {
                  path[t] = vertex;
-            //    ft_putendl(ACCESS_HASH(vertex, name));
-            //   ft_putchar('\n');
-             ft_putnbr(path[t]);
                 t++;
                 vertex = next_vertex;
                 break;

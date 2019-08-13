@@ -6,7 +6,7 @@
 #    By: viduvern <viduvern@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/03/12 10:01:03 by viduvern          #+#    #+#              #
-#    Updated: 2019/08/12 16:06:31 by viduvern         ###   ########.fr        #
+#    Updated: 2019/08/13 15:10:38 by viduvern         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,7 @@ SRC =  srcs/main.c \
 	   srcs/bfs.c \
 	   srcs/utils_queue.c \
 	   srcs/queue.c \
+	   srcs/dispatch.c \
 
 FLAG = -Wall -Werror -Wextra -g -fsanitize=address -I includes/ 
 CG = \033[92m

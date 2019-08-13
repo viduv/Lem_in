@@ -6,7 +6,7 @@
 /*   By: viduvern <viduvern@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/23 13:53:54 by viduvern          #+#    #+#             */
-/*   Updated: 2019/08/12 17:04:28 by viduvern         ###   ########.fr       */
+/*   Updated: 2019/08/12 20:06:11 by viduvern         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,11 +101,10 @@ int             check_nbr_ants(t_params *x)
 
 int             main(int ac, char **av)
 {
-    (void)av;
     int z;
     t_params x;
     t_list_path *first;
-
+    (void)av;
     first = NULL;
     ft_bzero(&x, sizeof(t_params));
     z = 0;
@@ -120,12 +119,14 @@ int             main(int ac, char **av)
         ft_data_adjlist(&x);
         dispatch_bfs(&x, &first);
         print_path(first);
+        dispatch(&x, first);
     }
     else 
         ft_putendl("\033[92m usage : ./lem_in < maps  --> One map only");
-  //  ft_putendl("la");
-    ft_free_list(&x);
-    ft_free_params(&x);
-   // system("leaks lem_in");
+    // ft_free_list(&x);
+    // ft_free_params(&x);
+    // ft_free_path(first);
+
+    // system("leaks lem_in");
     return(0);
 }

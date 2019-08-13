@@ -6,7 +6,7 @@
 /*   By: viduvern <viduvern@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/11 03:10:06 by viduvern          #+#    #+#             */
-/*   Updated: 2019/08/11 03:33:24 by viduvern         ###   ########.fr       */
+/*   Updated: 2019/08/12 20:04:07 by viduvern         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ t_queue           *create_queue(t_params *x)
         q->queue[i] = 0;
     q->front = -1;
     q->rear = -1;
-    ft_putendl("antoine tu as tord avec un d par contre");
     return(q);
 }
 
