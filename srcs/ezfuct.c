@@ -6,7 +6,7 @@
 /*   By: viduvern <viduvern@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/01 21:06:57 by viduvern          #+#    #+#             */
-/*   Updated: 2019/08/11 03:24:57 by viduvern         ###   ########.fr       */
+/*   Updated: 2019/08/12 16:04:16 by viduvern         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,30 +22,16 @@ int     is_empty(t_queue *q)
 
 void                init_hash_struct(t_params *x, char *line)
 {
-    x->hash_table[(hashe(line) % N_ROOM_MAX)].head = NULL;
-    if(x->hash_table[(hashe(line) % N_ROOM_MAX)].name != NULL)
-        error();
-    x->hash_table[(hashe(line) % N_ROOM_MAX)].name = ft_strdup(line);
-}
- int                parse_edge_adjlist(char *line, t_params *x)
-{   
-    char **str;
-    int i;
+    int index;
 
-    i = 0;
-    str = ft_strsplit(line, '-');
-    if(str[2])
-        error();
-    if(strcmp(str[0], x->hash_table[hashe(str[0]) % N_ROOM_MAX].name) == 0)
-        i++;
-    if(strcmp(str[1], x->hash_table[hashe(str[1]) % N_ROOM_MAX].name) == 0)
-        i++;
-    ft_free_db_tab(str);
-    if(i == 2)
-        return(1);
-    else
-        error();
-    return(0);
+    index = hashe(line) % N_ROOM_MAX;
+    while(x->hash_table[index].name != NULL)
+    {
+        index++;
+        ft_putendl("ENCORE MON POTE C CHIANT LA VIE EEEEEE");
+    }
+    x->hash_table[index].head = NULL;
+    x->hash_table[index].name = ft_strdup(line);
 }
 
 int		ft_isdigit(int c)

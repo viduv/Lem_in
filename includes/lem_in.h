@@ -6,7 +6,7 @@
 /*   By: viduvern <viduvern@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 15:26:24 by viduvern          #+#    #+#             */
-/*   Updated: 2019/08/11 23:07:24 by viduvern         ###   ########.fr       */
+/*   Updated: 2019/08/12 17:03:39 by viduvern         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,20 @@
 # define FNV_PRIME_32 16777619
 # define ACCESS_HASH(index, string)  x->hash_table[index].string
 # define N_ROOM x->nbr_room;
+
+typedef struct s_list_path
+{
+    int step;
+    int *path;
+    struct s_list_path *next;
+}               t_list_path;
+
 typedef struct  s_queue
 {
     int *queue;
     int front;
     int rear;
+  //  t_list_path *first;
 
 }               t_queue;
 
@@ -77,9 +86,9 @@ int             start_end_vertex(t_params *x);
 int             is_empty(t_queue *q); 
 void            refresh_visited(t_params *x);
 void            free_queue(t_queue *q);
-void            ft_get_path(t_params *x, int vertex, t_queue *q);
+void            ft_get_path(t_params *x, int vertex, t_queue *q, t_list_path **first);
 void            init_hash_struct(t_params *x, char *line);
-int             dispatch_bfs(t_params *x);
+int             dispatch_bfs(t_params *x, t_list_path **first);
 void            print_list(t_params *x, char *room);
 void		    ft_free_params(t_params *x);
 void		    ft_free_list(t_params *x);
@@ -97,5 +106,6 @@ void            free_tab(t_params *x);
 void            free_queue(t_queue *q);
  void           refresh_visited(t_params *x);
 void            refresh_tab(t_queue *q, t_params *x);
+void            print_path(t_list_path *head);
 
 #endif

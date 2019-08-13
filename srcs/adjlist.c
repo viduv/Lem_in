@@ -6,7 +6,7 @@
 /*   By: viduvern <viduvern@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/31 01:43:16 by viduvern          #+#    #+#             */
-/*   Updated: 2019/08/10 00:54:06 by viduvern         ###   ########.fr       */
+/*   Updated: 2019/08/12 16:16:03 by viduvern         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,35 +44,46 @@ static void              set_index_adjlist(char *line, t_params *x)
 
      str = ft_strsplit(line, '-');
      index_src = hashe(str[0]) % N_ROOM_MAX;
-     index_dest = hashe(str[1]) % N_ROOM_MAX; 
+     index_dest = hashe(str[1]) % N_ROOM_MAX;     
+    while(strcmp(str[0], x->hash_table[index_src].name) != 0)
+            index_src++;
+    while(strcmp(str[1], x->hash_table[index_dest].name) != 0)
+         index_dest++;
      ft_free_db_tab(str);
      add_edge_adjlist(index_src, index_dest, x);
 }
-static int                parse_edge_adjlist(char *line, t_params *x)
+
+static void                parse_edge_adjlist(char *line, t_params *x)
 {   
     char **str;
     int i;
-
+    int index;
+    int index2;
     i = 0;
     str = ft_strsplit(line, '-');
+    index = hashe(str[0]) % N_ROOM_MAX;
+    index2 = hashe(str[1]) % N_ROOM_MAX;
     if(str[2])
         error();
-    if(strcmp(str[0], x->hash_table[hashe(str[0]) % N_ROOM_MAX].name) == 0)
+    if(strcmp(str[0], x->hash_table[index].name)== 0)
         i++;
-    if(strcmp(str[1], x->hash_table[hashe(str[1]) % N_ROOM_MAX].name) == 0)
-        i++;
-    ft_free_db_tab(str);
-    if(i == 2)
-        return(1);
     else
+        while(index < N_ROOM_MAX && i < 1)
+            strcmp(str[0], x->hash_table[index].name) == 0 ? i++ : index++; 
+    if(strcmp(str[1], x->hash_table[index2].name) == 0)
+         i++;
+    else
+        while(index2 < N_ROOM_MAX && i < 2)
+            strcmp(str[1], x->hash_table[index2].name) == 0 ? i++ : index2++; 
+   ft_free_db_tab(str);
+    if(i != 2)
         error();
-    return(0);
 }
 
  void                ft_data_adjlist(t_params *x)
  {
     char *line;
-
+    ft_putendl("LES DERNIESRS SERONT LES PREMIER NTPSNKLDKLDNKLNKNKLNKLKLN");
     parse_edge_adjlist(x->tmp, x);
     set_index_adjlist(x->tmp, x);
     while(get_next_line(STDIN_FILENO, &line) > 0)
@@ -87,5 +98,4 @@ static int                parse_edge_adjlist(char *line, t_params *x)
     }
     split_name_room(&x->start);
     split_name_room(&x->end);
-     dispatch_bfs(x);
 }
