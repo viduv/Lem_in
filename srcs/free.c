@@ -6,11 +6,24 @@
 /*   By: viduvern <viduvern@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/01 21:05:31 by viduvern          #+#    #+#             */
-/*   Updated: 2019/08/07 18:58:11 by viduvern         ###   ########.fr       */
+/*   Updated: 2019/08/13 21:44:11 by viduvern         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
+
+void                     ft_free_path(t_list_path *head)
+{
+     t_list_path *tmp;
+
+     while(head != NULL)
+     {
+          tmp = head->next;
+          free(head->path);
+          free(head);
+          head = tmp;
+     }
+}
 
 char		**ft_free_db_tab(char **av)
 {

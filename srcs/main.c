@@ -6,7 +6,7 @@
 /*   By: viduvern <viduvern@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/23 13:53:54 by viduvern          #+#    #+#             */
-/*   Updated: 2019/08/12 20:06:11 by viduvern         ###   ########.fr       */
+/*   Updated: 2019/08/14 00:14:47 by viduvern         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,8 @@ int             parse_room(char *line)
      return(1);  
 }
 
-/// Main parse fonction  --> Store the imput file for print at the end of program ; Parse the imput error ; Set the head of /
-// the linklist a NULL ; Store and hashe the string in an array;
+/// Main parse fonction  --> Store the imput file for print at the end ; Parse the imput error ; Set the head of /
+// the linklist ; Store and hashe the string in an array;
 
 char             *ft_parse(t_params *x)
 {
@@ -118,7 +118,6 @@ int             main(int ac, char **av)
             error();
         ft_data_adjlist(&x);
         dispatch_bfs(&x, &first);
-        print_path(first);
         dispatch(&x, first);
     }
     else 
