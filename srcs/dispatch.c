@@ -6,7 +6,7 @@
 /*   By: viduvern <viduvern@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/12 19:41:12 by viduvern          #+#    #+#             */
-/*   Updated: 2019/08/14 01:14:03 by viduvern         ###   ########.fr       */
+/*   Updated: 2019/08/14 01:46:30 by viduvern         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,17 +83,25 @@ void                path_ants_count(t_list_path *first, t_params *x)
     }
 }
 
+void                print(int index)
+{
+        ft_putchar('L');
+        ft_putnbr(index);   
+}
 void                print_realpath(t_params *x, t_list_path *first)
 {
-    char *tmp;
+    t_list_path *tmp;
     tmp = first;
-    int index;
 
     index = 0;
     while(tmp != NULL)
     {
-        print_ants(index);
-
+        if(tmp->ants != 0)
+         {
+            print_ants(index);
+            tmp->ants--;
+            index++;
+        tmp = tmp->next;
     }
 
 }
