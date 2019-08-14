@@ -6,12 +6,12 @@
 /*   By: viduvern <viduvern@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/23 13:53:54 by viduvern          #+#    #+#             */
-/*   Updated: 2019/08/14 00:14:47 by viduvern         ###   ########.fr       */
+/*   Updated: 2019/08/14 01:46:02 by viduvern         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
-// Define ##start et ##end Room ;
+// Define ##start and ##end Room ;
 void            define_flags(char *line, t_params *x)
 {
     if(x->symb == 1)
