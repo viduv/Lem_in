@@ -6,7 +6,7 @@
 /*   By: viduvern <viduvern@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/12 19:41:12 by viduvern          #+#    #+#             */
-/*   Updated: 2019/08/16 00:42:57 by viduvern         ###   ########.fr       */
+/*   Updated: 2019/08/16 04:34:18 by viduvern         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,11 @@ int                 check_simple_path(t_list_path *first, t_params *x)
         first->ants = x->nbr_ants;
         return(1);
     }
-    if(x->nbr_ants < (size_t)first->step)
-    {
-        first->ants = x->nbr_ants;
-        return(1);
-    } 
+    // if(x->nbr_ants < (size_t)first->step)
+    // {
+    //     first->ants = x->nbr_ants;
+    //     return(1);
+    // } 
     return(0);
 }
 void                path_ants_count(t_list_path *first, t_params *x)
@@ -130,14 +130,43 @@ void                set_printindex(int ants, t_params *x, int **index, int step,
         }
         step--;
     }
-    (*index)[1] = ants;
-    print((*index)[1], ACCESS_HASH(path[0], name));
-}              
+    if(ants != 0)
+    {
+        (*index)[1] = ants;
+        print((*index)[1], ACCESS_HASH(path[0], name));
+    }
+}   
+
+void          dispatch_end_path(t_list_path *first, t_params *x)
+{
+    t_list_path *tmp;
+    ft_putendl("ENDDD");
+    tmp = first;
+    int i = 0;
+   // while(tmp->index[tmp->step] != (int)x->nbr_ants)
+      //  while(i < 37)
+        {
+         while(tmp != NULL)
+            {
+                set_printindex(0, x, &tmp->index, tmp->step, tmp->path);
+                if(tmp->next == NULL)
+                   ft_putchar('\n');
+                tmp = tmp->next;
+            }
+           tmp = first;
+           i++; 
+        }
+     ft_putchar('L');
+     ft_putnbr(x->nbr_ants);
+     ft_putchar(' ');
+     ft_putendl(ACCESS_HASH(tmp->path[tmp->step], name));
+}
+
 void                execute_path(t_list_path *first, t_params *x)
 {
     t_list_path *tmp;
     size_t ants = 0;
-
+    tmp = first;
     while(ants < x->nbr_ants)
     {
         tmp = first;
@@ -145,12 +174,11 @@ void                execute_path(t_list_path *first, t_params *x)
          {
              if(tmp->ants == 0)
             {
-                if(tmp->next == NULL)
-                    ft_putchar('\n');
+                ft_putchar('\n');
                 break;
             }
             ants++;
-            set_printindex(ants, x, &tmp->index, tmp->step + 1, tmp->path);
+            set_printindex(ants, x, &tmp->index, tmp->step , tmp->path);
             tmp->ants--;
             if(tmp->next == NULL)
             {
@@ -160,6 +188,7 @@ void                execute_path(t_list_path *first, t_params *x)
             tmp = tmp->next;
           }
     }
+   dispatch_end_path(first, x);
 }
 
 void                dispatch(t_params *x, t_list_path *first)
@@ -167,6 +196,9 @@ void                dispatch(t_params *x, t_list_path *first)
     t_list_path *tmp;
     (void)x;
     tmp = first;
+    int turn;
+
+    turn = 0;
     reverse_path(first);
     path_ants_count(first, x);
     print_path(first, x);

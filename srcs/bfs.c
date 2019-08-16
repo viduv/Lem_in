@@ -6,7 +6,7 @@
 /*   By: viduvern <viduvern@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/08 12:50:29 by viduvern          #+#    #+#             */
-/*   Updated: 2019/08/15 23:57:17 by viduvern         ###   ########.fr       */
+/*   Updated: 2019/08/16 04:04:51 by viduvern         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ void                ft_get_path(t_params *x, int vertex, t_queue *q, t_list_path
     while(i++ < x->nbr_room - 1)
         path[i] = 0;
     path[0] = hashe(x->end) % N_ROOM_MAX;
+    ft_putendl(ACCESS_HASH(hashe(x->end) % N_ROOM_MAX, name));
     while(step > 0)
     {
         s = ACCESS_HASH(vertex, head);
