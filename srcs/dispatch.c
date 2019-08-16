@@ -6,7 +6,7 @@
 /*   By: viduvern <viduvern@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/12 19:41:12 by viduvern          #+#    #+#             */
-/*   Updated: 2019/08/14 01:46:30 by viduvern         ###   ########.fr       */
+/*   Updated: 2019/08/16 00:42:57 by viduvern         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,28 +83,85 @@ void                path_ants_count(t_list_path *first, t_params *x)
     }
 }
 
-void                print(int index)
+void                print(int index, char *str)
 {
         ft_putchar('L');
-        ft_putnbr(index);   
+        ft_putnbr(index);
+        ft_putchar('-');
+        ft_putstr(str);
+        ft_putchar(' ');
 }
-void                print_realpath(t_params *x, t_list_path *first)
+int                 *ft_index_zero(t_params *x)
+{
+    int *index;
+    int i;
+
+    i = 0;
+    index = (int*)malloc(sizeof(int) * x->nbr_room);
+    while(i < x->nbr_room)
+    {
+        index[i] = 0;
+        i++;
+    }
+    return(index);
+}
+void                set_index(t_list_path *first, t_params *x)
 {
     t_list_path *tmp;
     tmp = first;
-
-    index = 0;
+    
     while(tmp != NULL)
     {
-        if(tmp->ants != 0)
-         {
-            print_ants(index);
-            tmp->ants--;
-            index++;
+        tmp->index = ft_index_zero(x);
         tmp = tmp->next;
     }
 
 }
+
+void                set_printindex(int ants, t_params *x, int **index, int step, int *path)
+{
+    while(step > 0)
+    {
+        if((*index)[step] != 0)
+        {
+            print((*index)[step], ACCESS_HASH(path[step], name));
+            (*index)[step + 1] = (*index)[step];
+            (*index)[step] = 0;
+        }
+        step--;
+    }
+    (*index)[1] = ants;
+    print((*index)[1], ACCESS_HASH(path[0], name));
+}              
+void                execute_path(t_list_path *first, t_params *x)
+{
+    t_list_path *tmp;
+    size_t ants = 0;
+
+    while(ants < x->nbr_ants)
+    {
+        tmp = first;
+        while(tmp != NULL)
+         {
+             if(tmp->ants == 0)
+            {
+                if(tmp->next == NULL)
+                    ft_putchar('\n');
+                break;
+            }
+            ants++;
+            set_printindex(ants, x, &tmp->index, tmp->step + 1, tmp->path);
+            tmp->ants--;
+            if(tmp->next == NULL)
+            {
+                ft_putchar('\n');
+                break;
+            }
+            tmp = tmp->next;
+          }
+    }
+}
+
 void                dispatch(t_params *x, t_list_path *first)
 {
     t_list_path *tmp;
@@ -112,9 +169,10 @@ void                dispatch(t_params *x, t_list_path *first)
     tmp = first;
     reverse_path(first);
     path_ants_count(first, x);
-    print_path(first);
+    print_path(first, x);
+    set_index(first, x);
+    execute_path(first,x);
 }
-//     pathfull = (int**)malloc(sizeof(int*) * i);
 //     tmp = first;
 //     while(tmp != NULL)
 //     {

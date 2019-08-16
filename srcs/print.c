@@ -6,19 +6,23 @@
 /*   By: viduvern <viduvern@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/07 16:56:45 by viduvern          #+#    #+#             */
-/*   Updated: 2019/08/13 21:55:23 by viduvern         ###   ########.fr       */
+/*   Updated: 2019/08/16 00:35:29 by viduvern         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-void                     print_path(t_list_path *head)
+void                     print_path(t_list_path *head, t_params *x)
 {
      while(head != NULL)
      {
           ft_putnbr(head->ants);
           ft_putchar(' ');
           ft_putnbr(head->step);
+         ft_putendl(ACCESS_HASH(head->path[0], name));
+        //  ft_putendl(ACCESS_HASH(head->path[1], name));
+         // ft_putendl(ACCESS_HASH(head->path[2], name));
+         // ft_putendl(ACCESS_HASH(head->path[3], name));
           ft_putchar('\n');
           head = head->next;
      }

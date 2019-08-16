@@ -6,7 +6,7 @@
 /*   By: viduvern <viduvern@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/08 12:50:29 by viduvern          #+#    #+#             */
-/*   Updated: 2019/08/13 15:41:28 by viduvern         ###   ########.fr       */
+/*   Updated: 2019/08/15 23:57:17 by viduvern         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void                ft_get_path(t_params *x, int vertex, t_queue *q, t_list_path
    t_linked_list *s;
    size_t step;
    int next_vertex;
-   int i = 0;
+   int i = -1;
    int t = 1;
    int save_step;
 

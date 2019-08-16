@@ -6,7 +6,7 @@
 /*   By: viduvern <viduvern@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 15:26:24 by viduvern          #+#    #+#             */
-/*   Updated: 2019/08/13 15:41:42 by viduvern         ###   ########.fr       */
+/*   Updated: 2019/08/16 00:18:55 by viduvern         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ typedef struct s_list_path
     int step;
     int *path;
     int ants;
+    int *index;
     struct s_list_path *next;
 }               t_list_path;
 
@@ -109,6 +110,6 @@ void            free_tab(t_params *x);
 void            free_queue(t_queue *q);
  void           refresh_visited(t_params *x);
 void            refresh_tab(t_queue *q, t_params *x);
-void            print_path(t_list_path *head);
+void            print_path(t_list_path *head, t_params *x);
 
 #endif
