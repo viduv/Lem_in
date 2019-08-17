@@ -6,7 +6,7 @@
 /*   By: viduvern <viduvern@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/01 21:05:31 by viduvern          #+#    #+#             */
-/*   Updated: 2019/08/13 21:44:11 by viduvern         ###   ########.fr       */
+/*   Updated: 2019/08/16 19:13:09 by viduvern         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void                     ft_free_path(t_list_path *head)
      while(head != NULL)
      {
           tmp = head->next;
+		  free(head->index);
           free(head->path);
           free(head);
           head = tmp;

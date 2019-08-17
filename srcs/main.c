@@ -6,7 +6,7 @@
 /*   By: viduvern <viduvern@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/23 13:53:54 by viduvern          #+#    #+#             */
-/*   Updated: 2019/08/14 01:46:02 by viduvern         ###   ########.fr       */
+/*   Updated: 2019/08/16 18:47:06 by viduvern         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,6 @@ char             *ft_parse(t_params *x)
             {
                 split_name_room(&line);
                 init_hash_struct(x, line);
-            //    printf("%s", x->hash_table[hashe(line) % N_ROOM_MAX].name);
                 x->nbr_room++;
             }
          }

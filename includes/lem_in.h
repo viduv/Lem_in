@@ -6,7 +6,7 @@
 /*   By: viduvern <viduvern@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 15:26:24 by viduvern          #+#    #+#             */
-/*   Updated: 2019/08/16 00:18:55 by viduvern         ###   ########.fr       */
+/*   Updated: 2019/08/16 19:10:37 by viduvern         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,8 @@ typedef struct               s_params
 {
     size_t      nbr_ants;
     int         nbr_room;
-    size_t      t;
+    int           t;
+    size_t      next_vertex;
     int         symb;
     int         error;
     t_structure      hash_table[N_ROOM_MAX];

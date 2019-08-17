@@ -6,23 +6,12 @@
 /*   By: viduvern <viduvern@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/12 19:41:12 by viduvern          #+#    #+#             */
-/*   Updated: 2019/08/16 15:38:09 by viduvern         ###   ########.fr       */
+/*   Updated: 2019/08/16 19:15:40 by viduvern         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-
-// void                print_final(int **pathfull, int ants, t_params *x)
-// {
-//     (void)ants;
-//     // int i = 0;
-//     // int x = 0;
-//     ft_putendl(ACCESS_HASH(pathfull[0][0] ,name));
-//     ft_putendl(ACCESS_HASH(pathfull[0][1] ,name));
-//     ft_putendl(ACCESS_HASH(pathfull[0][2] ,name));
-
-// }
 void                reverse_path(t_list_path *first)
 {
     t_list_path *tmp;
@@ -34,14 +23,16 @@ void                reverse_path(t_list_path *first)
     }
 }
 
-int                 check_simple_path(t_list_path *first, t_params *x)
+int                 path_ants_counts(t_list_path **tmp, size_t *nbr_ants)
 {
-    if(first->next == NULL)
-    {
-        first->ants = x->nbr_ants;
+    (*tmp)->ants++;
+    (*nbr_ants)++;
+     if((*tmp)->next != NULL && (*tmp)->ants + (*tmp)->step > (*tmp)->next->step) 
+      {
+        (*tmp) = (*tmp)->next;
         return(1);
-    }
-    return(0);
+      }
+      return(0);
 }
 void                path_ants_count(t_list_path *first, t_params *x)
 {
@@ -49,25 +40,21 @@ void                path_ants_count(t_list_path *first, t_params *x)
     size_t nbr_ants;
 
     nbr_ants = 0;
-    if(check_simple_path(first, x) == 1)
-        return ;
     while(nbr_ants < x->nbr_ants)
     {
         tmp = first;
         while(tmp != NULL && nbr_ants < x->nbr_ants)
             if(nbr_ants > 0)
              {
-                tmp->ants++;
-                nbr_ants++;
-                if(tmp->next != NULL && tmp->ants + tmp->step > tmp->next->step) 
-                    tmp = tmp->next;
+                 if(path_ants_counts(&tmp, &nbr_ants) == 1)
+                    ;
                 else 
                     break;
              }
              else
                 while(nbr_ants < x->nbr_ants)
                 {
-                    if(tmp->ants + tmp->step > tmp->next->step)
+                    if( tmp->next && tmp->ants + tmp->step > tmp->next->step)
                     {
                         tmp = tmp->next;
                         break;
@@ -144,12 +131,22 @@ int          dispatch_end_path(int *index, int step)
     return(0);
 }
 
+void                ex_path(t_list_path *tmp, t_params *x, int *turn)
+ {
+    set_printindex(0, x, &tmp->index, tmp->step, tmp->path);
+    if(dispatch_end_path(tmp->index, tmp->step) == 0)
+        (*turn)--;
+    if(tmp->next == NULL)
+        ft_putchar('\n');
+}
 void                execute_path(t_list_path *first, t_params *x, int turn)
 {
     t_list_path *tmp;
-    int save = turn;
-    size_t ants = 0;
-    tmp = first;
+    int save;
+    size_t ants;
+
+    save = turn;
+    ants = 0;
     while(turn != 0)
     {
         turn = save;
@@ -157,23 +154,14 @@ void                execute_path(t_list_path *first, t_params *x, int turn)
         while(tmp != NULL)
          {
              if(tmp->ants == 0)
-            {
-                set_printindex(0, x, &tmp->index, tmp->step, tmp->path);
-                if(dispatch_end_path(tmp->index, tmp->step) == 0)
-                    turn--;
-                if(tmp->next == NULL)
-                    ft_putchar('\n');
-            }
+                ex_path(tmp, x, &turn);
             else
             {
                 ants++;
                 set_printindex(ants, x, &tmp->index, tmp->step , tmp->path);
                  tmp->ants--;
                  if(tmp->next == NULL)
-                 {
                      ft_putchar('\n');
-                     break;
-                 }
             }
             tmp = tmp->next;
           }

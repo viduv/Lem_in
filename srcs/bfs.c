@@ -6,7 +6,7 @@
 /*   By: viduvern <viduvern@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/08 12:50:29 by viduvern          #+#    #+#             */
-/*   Updated: 2019/08/16 15:36:59 by viduvern         ###   ########.fr       */
+/*   Updated: 2019/08/16 19:10:22 by viduvern         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,43 +38,59 @@ void                ft_store_path(int step, int *path, t_list_path **first)
     }
 }
 
+void                continue_path(t_params *x, t_queue *q, t_list_path **first, int *path, int save_step)
+{
+     refresh_visited(x);
+     free_queue(q);
+     ft_store_path(save_step, path, first); 
+}
+
+int                *set_tab_path(int *path, t_params *x)
+ {
+     int i;
+     
+     i = -1;
+     path = (int*)malloc(sizeof(int) * x->nbr_room); 
+       while(i++ < x->nbr_room - 1)
+        path[i] = 0;
+    path[0] = hashe(x->end) % N_ROOM_MAX;
+    return(path);
+}
+
+void            put_in_path(int **path, int *t, int *vertex, int next_vertex)
+ {
+     (*path)[(*t)] = (*vertex);
+     (*t)++;
+     (*vertex) = next_vertex;
+}
 void                ft_get_path(t_params *x, int vertex, t_queue *q, t_list_path **first)
 {
    t_linked_list *s;
    size_t step;
-   int next_vertex;
-   int i = -1;
-   int t = 1;
+   int *path;
    int save_step;
-
-   int *path = (int*)malloc(sizeof(int) * x->nbr_room); 
-   next_vertex = 0;
+    x->t = 1;
+    path = NULL;
    step = ACCESS_HASH(vertex, head)->step;
    save_step = step;
-    while(i++ < x->nbr_room - 1)
-        path[i] = 0;
-    path[0] = hashe(x->end) % N_ROOM_MAX;
+   path = set_tab_path(path, x);
     while(step > 0)
     {
         s = ACCESS_HASH(vertex, head);
         ACCESS_HASH(vertex, head)->path = true;
         while(s != NULL)
          {
-            next_vertex = s->data;
-            if(ACCESS_HASH(next_vertex, head)->step == (step - 1))
+            x->next_vertex = s->data;
+            if(ACCESS_HASH(x->next_vertex, head)->step == (step - 1))
             {
-                 path[t] = vertex;
-                t++;
-                vertex = next_vertex;
+                put_in_path(&path, &x->t, &vertex, x->next_vertex);
                 break;
             }
             s = s->next;
          }
          step = ACCESS_HASH(vertex, head)->step;
     }
-     refresh_visited(x);
-     free_queue(q);
-     ft_store_path(save_step, path, first);
+    continue_path(x, q, first, path, save_step);
 }
 
 int             recursive_bfs(t_params *x, t_linked_list *l, t_queue *q, int adjvertex, int step, int vertex, t_list_path **first)
