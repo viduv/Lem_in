@@ -6,13 +6,13 @@
 /*   By: viduvern <viduvern@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/12 19:41:12 by viduvern          #+#    #+#             */
-/*   Updated: 2019/08/16 23:39:45 by viduvern         ###   ########.fr       */
+/*   Updated: 2019/08/16 23:45:58 by viduvern         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-void	set_printindex(int ants, t_params *x, int **index, int step, int *path)
+void	set_printindex(t_params *x, int **index, int step, int *path)
 {
 	while (step > 0)
 	{
@@ -24,9 +24,9 @@ void	set_printindex(int ants, t_params *x, int **index, int step, int *path)
 		}
 		step--;
 	}
-	if (ants != 0)
+	if (x->count_ants != 0)
 	{
-		(*index)[1] = ants;
+		(*index)[1] = x->count_ants;
 		print((*index)[1], ACCESS_HASH(path[0], name));
 	}
 }
@@ -47,7 +47,8 @@ int		dispatch_end_path(int *index, int step)
 
 void	ex_path(t_list_path *tmp, t_params *x, int *turn)
 {
-	set_printindex(0, x, &tmp->index, tmp->step, tmp->path);
+	x->count_ants = 0;
+	set_printindex(x, &tmp->index, tmp->step, tmp->path);
 	if (dispatch_end_path(tmp->index, tmp->step) == 0)
 		(*turn)--;
 	if (tmp->next == NULL)
@@ -58,10 +59,9 @@ void	execute_path(t_list_path *first, t_params *x, int turn)
 {
 	t_list_path		*tmp;
 	int				save;
-	size_t			ants;
 
 	save = turn;
-	ants = 0;
+	x->count_ants = 0;
 	while (turn != 0)
 	{
 		turn = save;
@@ -72,8 +72,8 @@ void	execute_path(t_list_path *first, t_params *x, int turn)
 				ex_path(tmp, x, &turn);
 			else
 			{
-				ants++;
-				set_printindex(ants, x, &tmp->index, tmp->step, tmp->path);
+				x->count_ants++;
+				set_printindex(x, &tmp->index, tmp->step, tmp->path);
 				tmp->ants--;
 				if (tmp->next == NULL)
 					ft_putchar('\n');
