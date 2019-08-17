@@ -6,24 +6,24 @@
 /*   By: viduvern <viduvern@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/01 21:05:31 by viduvern          #+#    #+#             */
-/*   Updated: 2019/08/16 19:13:09 by viduvern         ###   ########.fr       */
+/*   Updated: 2019/08/16 22:05:24 by viduvern         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-void                     ft_free_path(t_list_path *head)
+void		ft_free_path(t_list_path *head)
 {
-     t_list_path *tmp;
+	t_list_path *tmp;
 
-     while(head != NULL)
-     {
-          tmp = head->next;
-		  free(head->index);
-          free(head->path);
-          free(head);
-          head = tmp;
-     }
+	while (head != NULL)
+	{
+		tmp = head->next;
+		free(head->index);
+		free(head->path);
+		free(head);
+		head = tmp;
+	}
 }
 
 char		**ft_free_db_tab(char **av)
@@ -39,29 +39,30 @@ char		**ft_free_db_tab(char **av)
 	av = NULL;
 	return (av);
 }
+
 void		ft_free_params(t_params *x)
 {
-	 ft_strdel(&x->start);
-    ft_strdel(&x->end);
-     ft_strdel(&x->tmp);
-//     //ft_free_db_tab(x.storefile);
+	ft_strdel(&x->start);
+	ft_strdel(&x->end);
+	ft_strdel(&x->tmp);
 }
+
 void		ft_free_list(t_params *x)
 {
+	int				i;
+	t_linked_list	*t;
+	t_linked_list	*y;
 
-	int i = 0;
-	t_linked_list *t;
-	t_linked_list *y;
-
-	while(i < N_ROOM_MAX)
+	i = 0;
+	while (i < N_ROOM_MAX)
 	{
-		 if(x->hash_table[i].name != NULL)
+		if (x->hash_table[i].name != NULL)
 			ft_strdel(&x->hash_table[i].name);
-		 if(x->hash_table[i].head != NULL)
+		if (x->hash_table[i].head != NULL)
 		{
 			t = x->hash_table[i].head;
 			y = x->hash_table[i].head;
-			while(t != NULL)
+			while (t != NULL)
 			{
 				y = t->next;
 				free(t);
