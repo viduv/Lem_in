@@ -6,46 +6,31 @@
 /*   By: viduvern <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/12 10:25:32 by viduvern          #+#    #+#             */
-/*   Updated: 2019/03/15 09:43:26 by viduvern         ###   ########.fr       */
+/*   Updated: 2019/08/17 12:06:16 by viduvern         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/libft.h"
 
-static char	*clean(char *str)
+int			ft_atoi(const char *str)
 {
-	while (*str == '\n' || *str == '\v' ||
-			*str == '\t' || *str == '\r' ||
-			*str == '\f' || *str == ' ')
-		str++;
-	return (str);
-}
+	int i;
+	int nb;
+	int sign;
 
-int			ft_atoi(char *str)
-{
-	int result;
-
-	result = 0;
-	str = clean(str);
-	if (*str == '-' && ft_isdigit(*(str + 1)))
+	i = 0;
+	nb = 0;
+	sign = 1;
+	while (str[i] < 33)
+		i++;
+	if (str[i] == '-')
+		sign = -1;
+	if (str[i] == '-' || str[i] == '+')
+		i++;
+	while (str[i] && str[i] >= '0' && str[i] <= '9')
 	{
-		result = 0 - (*(str + 1) - '0');
-		while (ft_isdigit(*(str + 2)))
-			result = result * 10 - (*(str++ + 2) - '0');
+		nb = ((nb * 10 + str[i]) - 48);
+		i++;
 	}
-	else if (*str == '+' && ft_isdigit(*(str + 1)))
-	{
-		result = *(str + 1) - '0';
-		while (ft_isdigit(*(str + 2)))
-			result = result * 10 + (*(str++ + 2) - '0');
-	}
-	else if (ft_isdigit(*str))
-	{
-		result = *str - '0';
-		while (ft_isdigit(*(str + 1)))
-			result = result * 10 + *(str++ + 1) - '0';
-	}
-	else
-		return (0);
-	return (result);
+	return (sign * nb);
 }

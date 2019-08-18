@@ -6,7 +6,7 @@
 /*   By: viduvern <viduvern@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/23 13:53:54 by viduvern          #+#    #+#             */
-/*   Updated: 2019/08/16 22:18:56 by viduvern         ###   ########.fr       */
+/*   Updated: 2019/08/17 12:05:34 by viduvern         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ int			check_nbr_ants(t_params *x)
 
 	while (get_next_line(STDIN_FILENO, &line) > 0)
 	{
-		x->nbr_ants = atoi(line);
+		x->nbr_ants = ft_atoi(line);
 		ft_strdel(&line);
 		break ;
 	}

@@ -6,7 +6,7 @@
 /*   By: viduvern <viduvern@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/12 10:16:36 by viduvern          #+#    #+#             */
-/*   Updated: 2019/03/25 14:26:53 by viduvern         ###   ########.fr       */
+/*   Updated: 2019/08/17 12:04:55 by viduvern         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ char				*ft_strjoin3(char const *s1, char const *s2,
 char				*ft_strjoinfree(char const *s1, char const *s2);
 char				*ft_strjoinfree1(char const *s1, char const *s2);
 char				*ft_strjoinfree2(char const *s1, char const *s2);
-int					ft_atoi(char *str);
+int					ft_atoi(const char *str);
 void				ft_bzero(void *s, size_t n);
 int					ft_isalnum(int c);
 int					ft_isalpha(int c);
