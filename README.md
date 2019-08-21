@@ -1,6 +1,6 @@
 # Lem_in
 
-This project is a 42's project algorithm branch, And Consist to design your own implementation of Djisktra's algorithm.
+This project is a 42's project algorithm branch, Consist to design your own implementation of Djisktra's algorithm.
 
 # About Lem_in 
 
