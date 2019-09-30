@@ -4,7 +4,7 @@ This project is a 42's project algorithm branch, Consist to design your own impl
 
 # About Lem_in 
 
-At the beginning from standart output the program recieves information about number of ants had to be leaded through path, room names (can be whatever) with coordinates and links.
+At the beginning from standart output the program receives information about number of ants had to be leaded through path, room names (can be whatever) with coordinates and links.
 
 ![Screen Shot 2019-09-24 at 2 50 51 PM](https://user-images.githubusercontent.com/48459848/65513061-cae8c500-deda-11e9-8efa-89efce83361f.png)
 
